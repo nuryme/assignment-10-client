@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import Banner from "../components/Banner";
 import RunningCampaign from "../components/RunningCampaign";
 import { useLoaderData } from "react-router-dom";
@@ -6,6 +6,7 @@ import Team from "../components/Team";
 import Stories from "../components/Stories";
 
 export default function Home() {
+
   const loadedCampaigns = useLoaderData();
 
   const [campaigns, setCampaigns] = useState([]);

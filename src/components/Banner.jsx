@@ -1,3 +1,5 @@
+import { Typewriter } from "react-simple-typewriter";
+
 export default function Banner() {
   return (
     <div>
@@ -7,7 +9,7 @@ export default function Banner() {
           className="carousel-item w-full md:flex justify-between h-full items-center gap-4"
         >
           <h1 className="h1">
-            Turn Dreams Into Reality – Fund & Support Today!
+            Turn Dreams Into Reality – <span className={'text-primaryColor'} ><Typewriter typeSpeed={50} loop={Infinity} words={['Fund Today!', 'Support Today!']} /></span>
           </h1>
           <img
             src="https://i.pinimg.com/474x/cd/b2/c6/cdb2c646e1578e593ff29a0861341aa5.jpg"

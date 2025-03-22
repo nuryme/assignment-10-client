@@ -9,6 +9,8 @@ export default function Details() {
   //   console.log(data);
 
   const handleDonation = () => {
+    const today = new Date()
+    
     const userName = user?.displayName;
     const userEmail = user?.email;
     const title = campaign.title
@@ -21,6 +23,13 @@ export default function Details() {
     })
       .then((res) => res.json())
       .then((data) => {
+        if(new Date(campaign.deadline) < today) {
+          return Swal.fire({
+            icon: "error",
+            title: "Oops...",
+            text: "Date Expired!",
+          });
+        }
         if(data.insertedId) {
           Swal.fire('Donation Successful')
         }

@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { MdDelete, MdEdit } from "react-icons/md";
 import { Link, useLoaderData } from "react-router-dom";
+import { Tooltip } from "react-tooltip";
 import Swal from "sweetalert2";
 
 export default function MyCampaign() {
@@ -41,6 +42,8 @@ export default function MyCampaign() {
 
   return (
     <div className="mt-20">
+        <Tooltip id="tooltip-delete" />
+        <Tooltip id="tooltip-update" />
       <h2 className="h2 text-center mb-6">All campaign here</h2>
       <div className="overflow-x-auto">
         <table className="table">
@@ -63,7 +66,13 @@ export default function MyCampaign() {
                 <td className="bodyText">{campaign.deadline}</td>
                 <td className="flex gap-4 h6">
                   <Link to={`/updateCampaign/${campaign._id}`}>
-                    <MdEdit className="text-secondaryColor" title="Update" />
+                    <MdEdit
+                      data-tooltip-id="tooltip-update"
+                      data-tooltip-content="Update Me!"
+                      data-tooltip-place="top"
+                      className="text-secondaryColor"
+                      title="Update"
+                    />
                   </Link>
                   <Link>
                     <MdDelete
@@ -71,7 +80,9 @@ export default function MyCampaign() {
                         handleDelete(campaign._id);
                       }}
                       className="text-primaryColor"
-                      title="Delete"
+                      data-tooltip-id="tooltip-delete"
+                      data-tooltip-content="Delete Me!"
+                      data-tooltip-place="top"
                     />
                   </Link>
                 </td>
