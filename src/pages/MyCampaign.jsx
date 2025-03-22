@@ -1,9 +1,44 @@
-import React from "react";
+import React, { useState } from "react";
 import { MdDelete, MdEdit } from "react-icons/md";
 import { Link, useLoaderData } from "react-router-dom";
+import Swal from "sweetalert2";
 
 export default function MyCampaign() {
-  const campaigns = useLoaderData();
+  const loadedCampaigns = useLoaderData();
+  const [campaigns, setCampaigns] = useState(loadedCampaigns);
+
+  const handleDelete = (id) => {
+    Swal.fire({
+      title: "Are you sure?",
+      text: "You won't be able to revert this!",
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonColor: "#3085d6",
+      cancelButtonColor: "#d33",
+      confirmButtonText: "Yes, delete it!",
+    }).then((result) => {
+      if (result.isConfirmed) {
+        fetch(`http://localhost:5000/campaigns/${id}`, {
+          method: "delete",
+        })
+          .then((res) => res.json())
+          .then((data) => {
+            if (data.deletedCount > 0) {
+              const remaining = loadedCampaigns.filter(
+                (campaign) => campaign._id !== id
+              );
+              setCampaigns(remaining);
+              Swal.fire({
+                title: "Deleted!",
+                text: "Your campaign has been deleted.",
+                icon: "success",
+              });
+            }
+          });
+      }
+    });
+  };
+
   return (
     <div className="mt-20">
       <h2 className="h2 text-center mb-6">All campaign here</h2>
@@ -30,8 +65,14 @@ export default function MyCampaign() {
                   <Link to={`/updateCampaign/${campaign._id}`}>
                     <MdEdit className="text-secondaryColor" title="Update" />
                   </Link>
-                  <Link to={`/updateCampaign/${campaign._id}`}>
-                  <MdDelete className="text-primaryColor" title="Delete" />
+                  <Link>
+                    <MdDelete
+                      onClick={() => {
+                        handleDelete(campaign._id);
+                      }}
+                      className="text-primaryColor"
+                      title="Delete"
+                    />
                   </Link>
                 </td>
               </tr>
