@@ -10,6 +10,7 @@ import PrivateRouter from "../private/PrivateRouter";
 import AllCampaign from "../pages/AllCampaign";
 import MyCampaign from "../pages/MyCampaign";
 import Update from "../pages/Update";
+import MyDonation from "../pages/MyDonation";
 
 const routes = createBrowserRouter([
     {
@@ -53,6 +54,11 @@ const routes = createBrowserRouter([
                 path: '/updateCampaign/:id',
                 loader: ({params}) => fetch(`http://localhost:5000/campaigns/${params.id}`),
                 element: <PrivateRouter><Update></Update></PrivateRouter>
+            },
+            {
+                path: '/myDonations',
+                element: <PrivateRouter><MyDonation></MyDonation></PrivateRouter>,
+                loader: () => fetch('http://localhost:5000/donations')
             }
         ]
     }

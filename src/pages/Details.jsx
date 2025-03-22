@@ -11,7 +11,8 @@ export default function Details() {
   const handleDonation = () => {
     const userName = user?.displayName;
     const userEmail = user?.email;
-    const donationInfo = { userName, userEmail };
+    const title = campaign.title
+    const donationInfo = { userName, userEmail, title};
 
     fetch("http://localhost:5000/donations", {
       method: "post",

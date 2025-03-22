@@ -11,16 +11,16 @@ export default function Navbar() {
         <NavLink to={"/"}>Home</NavLink>
       </li>
       <li>
-        <NavLink to={"allCampaign"}>All Campaign</NavLink>
+        <NavLink to={"/allCampaign"}>All Campaign</NavLink>
       </li>
       <li>
-        <NavLink to={"addCampaign"}>Add New Campaign</NavLink>
+        <NavLink to={"/addCampaign"}>Add New Campaign</NavLink>
       </li>
       <li>
-        <NavLink to={"myCampaign"}>My Campaign</NavLink>
+        <NavLink to={"/myCampaign"}>My Campaign</NavLink>
       </li>
       <li>
-        <NavLink to={"donation"}>My Donations</NavLink>
+        <NavLink to={"/myDonations"}>My Donations</NavLink>
       </li>
     </>
   );
