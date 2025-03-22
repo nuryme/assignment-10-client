@@ -1,10 +1,14 @@
 import { useContext } from "react";
 import { AuthContext } from "../provider/AuthProvider";
 import Swal from "sweetalert2";
+import { Navigate, useLocation, useNavigate } from "react-router-dom";
 
 export default function AddCampaign() {
 const {user} = useContext(AuthContext)
+const navigate = useNavigate()
 // console.log(user.displayName, user.email)
+
+
 
   const handleSubmit = (event) => {
     event.preventDefault();
@@ -42,6 +46,8 @@ const {user} = useContext(AuthContext)
         if(data.insertedId) {
             Swal.fire("Added successfully!");
         }
+        form.reset()
+        navigate('/')
       });
   };
 
@@ -135,7 +141,7 @@ const {user} = useContext(AuthContext)
         <div>
           <label className="block font-medium text-gray-700">User Email</label>
           <input
-          value={user.email}
+          value={user?.email}
             type="email"
             name="email"
             className="w-full mt-1 p-2 border bg-gray-100 rounded-md cursor-not-allowed"
@@ -146,7 +152,7 @@ const {user} = useContext(AuthContext)
         <div>
           <label className="block font-medium text-gray-700">User Name</label>
           <input
-          value={user.displayName}
+          value={user?.displayName}
             type="text"
             name="name"
             className="w-full mt-1 p-2 border bg-gray-100 rounded-md cursor-not-allowed"

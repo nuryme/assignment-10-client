@@ -15,7 +15,7 @@ export default function Home() {
     const runningCampaigns = loadedCampaigns.filter(
       (data) => new Date(data.deadline) > today
     );
-    setCampaigns(runningCampaigns);
+    setCampaigns(runningCampaigns.slice(0, 6));
   }, []);
   //   console.log(campaigns);
   return (

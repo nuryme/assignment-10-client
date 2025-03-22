@@ -1,5 +1,5 @@
 import { useContext, useState } from "react";
-import { Link, useNavigate } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import { AuthContext } from "../provider/AuthProvider";
 
 export default function Login() {
@@ -7,6 +7,7 @@ export default function Login() {
   const { firebaseLogin, setUser, firebaseGoogleLogin } =
     useContext(AuthContext);
   const navigate = useNavigate();
+  const location = useLocation();
   //   console.log(name)
 
   const handleLogin = (event) => {
@@ -24,7 +25,11 @@ export default function Login() {
         setUser(res.user);
         setError("");
         form.reset();
-        navigate("/");
+        {
+          location.state === null
+            ? navigate("/")
+            : navigate(location.state?.from);
+        }
       })
       .catch((err) => {
         setError(err.message);
@@ -35,7 +40,11 @@ export default function Login() {
     firebaseGoogleLogin()
       .then((res) => {
         setUser(res.user);
-        navigate("/");
+        {
+          location.state === null
+            ? navigate("/")
+            : navigate(location.state?.from);
+        }
       })
       .catch((err) => {
         Swal.fire({
@@ -91,7 +100,12 @@ export default function Login() {
         </form>
 
         <div className="flex justify-end">
-          <button onClick={handleGoogleLogin} className="secondaryButton w-fit h-fit">Login With Google</button>
+          <button
+            onClick={handleGoogleLogin}
+            className="secondaryButton w-fit h-fit"
+          >
+            Login With Google
+          </button>
         </div>
       </div>
     </div>

@@ -1,7 +1,10 @@
-import React from "react";
+import React, { useContext } from "react";
 import { Link, NavLink } from "react-router-dom";
+import { AuthContext } from "../provider/AuthProvider";
 
 export default function Navbar() {
+  const { user, firebaseLogOut } = useContext(AuthContext);
+
   const links = (
     <>
       <li>
@@ -21,6 +24,12 @@ export default function Navbar() {
       </li>
     </>
   );
+
+  const handleLogout = () => {
+    firebaseLogOut()
+    .catch(err => alert(err.message))
+  }
+  
 
   return (
     <div className="navbar bg-base-100 p-0">
@@ -49,13 +58,31 @@ export default function Navbar() {
             {links}
           </ul>
         </div>
-        <Link to={'/'} className="logo">Crowdcube</Link>
+        <Link to={"/"} className="logo">
+          Crowdcube
+        </Link>
       </div>
       <div className="navbar-center hidden lg:flex">
         <ul className="menu menu-horizontal px-1 navbar">{links}</ul>
       </div>
+
       <div className="navbar-end">
-        <Link to={'login'} className={'button'}>Login</Link>
+        {user ? (
+          <div className="gap-2 flex items-center">
+              <img className="w-10 h-10 rounded-full object-cover" src={user.photoURL} title={user.displayName} alt="" />
+              <button onClick={handleLogout} className="secondaryButton">Log Out</button>
+
+          </div>
+        ) : (
+          <div className="gap-2 flex items-center">
+            <Link to={"/login"} className={"button"}>
+              Login
+            </Link>
+            <Link to={"/registration"} className={"secondaryButton"}>
+              Registration
+            </Link>
+          </div>
+        )}
       </div>
     </div>
   );
