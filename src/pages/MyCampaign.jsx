@@ -1,7 +1,8 @@
 import React from "react";
+import { MdDelete, MdEdit } from "react-icons/md";
 import { Link, useLoaderData } from "react-router-dom";
 
-export default function AllCampaign() {
+export default function MyCampaign() {
   const campaigns = useLoaderData();
   return (
     <div className="mt-20">
@@ -25,9 +26,12 @@ export default function AllCampaign() {
                 <th className="bodyText">{index + 1}</th>
                 <td className="bodyText">{campaign.title}</td>
                 <td className="bodyText">{campaign.deadline}</td>
-                <td>
-                  <Link to={`/details/${campaign._id}`}>
-                    <button className="secondaryButton">See More</button>
+                <td className="flex gap-4 h6">
+                  <Link to={`/updateCampaign/${campaign._id}`}>
+                    <MdEdit className="text-secondaryColor" title="Update" />
+                  </Link>
+                  <Link to={`/updateCampaign/${campaign._id}`}>
+                  <MdDelete className="text-primaryColor" title="Delete" />
                   </Link>
                 </td>
               </tr>

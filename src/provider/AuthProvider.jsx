@@ -13,22 +13,28 @@ import {
 export const AuthContext = createContext();
 
 export default function AuthProvider({ children }) {
+
   const googleProvider = new GoogleAuthProvider();
   const [user, setUser] = useState();
+  const [loader, setLoader] = useState(true)
 
   const firebaseSignup = (email, password) => {
+    setLoader(true)
     return createUserWithEmailAndPassword(auth, email, password);
   };
 
   const firebaseLogin = (email, password) => {
+    setLoader(true)
     return signInWithEmailAndPassword(auth, email, password);
   };
 
   const firebaseGoogleLogin = () => {
+    setLoader(true)
     return signInWithPopup(auth, googleProvider);
   };
 
   const updateUser = (userData) => {
+    setLoader(true)
     return updateProfile(auth.currentUser, userData)
   }
   
@@ -36,6 +42,7 @@ export default function AuthProvider({ children }) {
   useEffect(() => {
     const unSubscribe = onAuthStateChanged(auth, (currentUser) => {
       setUser(currentUser);
+      setLoader(false)
     });
 
     return () => {
@@ -44,6 +51,7 @@ export default function AuthProvider({ children }) {
   }, []);
 
   const firebaseLogOut = () => {
+    setLoader(true)
     return signOut(auth)
   }
   
@@ -57,7 +65,8 @@ export default function AuthProvider({ children }) {
     firebaseLogin,
     firebaseGoogleLogin,
     updateUser,
-    firebaseLogOut
+    firebaseLogOut,
+    loader
   };
   return (
     <AuthContext.Provider value={authInfo}>{children}</AuthContext.Provider>
