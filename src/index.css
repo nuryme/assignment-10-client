@@ -1,0 +1,55 @@
+@import url('https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400..700;1,400..700&family=Montserrat:ital,wght@0,100..900;1,100..900&family=Nunito:ital,wght@0,200..1000;1,200..1000&display=swap');
+
+h1, h2, h3, h4, h5, h6 {
+  @apply font-headingFont leading-[1.2]
+}
+.h1 {
+  @apply text-6xl font-bold
+}
+.h2 {
+  @apply text-4xl font-semibold
+}
+.h3 {
+  @apply text-3xl font-medium
+}
+.h4 {
+  @apply lg:text-2xl font-medium md:text-xl text-lg
+}
+.h5 {
+  @apply text-xl
+}
+.h6 {
+  @apply text-lg
+}
+p {
+  @apply font-bodyFont leading-[1.5]
+}
+.bodyText {
+  @apply  text-bodyText
+}
+.logo {
+  @apply font-headingFont font-bold text-primaryColor text-2xl
+}
+.button {
+  @apply font-buttonFont bg-primaryColor px-8 py-2 rounded-md font-semibold text-lg text-white hover:bg-secondaryColor
+}
+.secondaryButton {
+   @apply font-buttonFont bg-secondaryColor px-8 py-2 rounded-md font-medium text-white hover:bg-primaryColor
+}
+.navbar li a {
+  @apply font-medium hover:text-accent hover:bg-transparent
+}
+li a.active {
+  @apply font-medium text-accent
+}
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+body {
+  @apply transition
+}
+html {
+  @apply box-border overflow-y-auto overflow-x-scroll 
+}
