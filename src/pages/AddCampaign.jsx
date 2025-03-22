@@ -1,4 +1,11 @@
+import { useContext } from "react";
+import { AuthContext } from "../provider/AuthProvider";
+import Swal from "sweetalert2";
+
 export default function AddCampaign() {
+const {user} = useContext(AuthContext)
+// console.log(user.displayName, user.email)
+
   const handleSubmit = (event) => {
     event.preventDefault();
 
@@ -32,7 +39,9 @@ export default function AddCampaign() {
     })
       .then((res) => res.json())
       .then((data) => {
-        console.log(data);
+        if(data.insertedId) {
+            Swal.fire("Added successfully!");
+        }
       });
   };
 
@@ -126,6 +135,7 @@ export default function AddCampaign() {
         <div>
           <label className="block font-medium text-gray-700">User Email</label>
           <input
+          value={user.email}
             type="email"
             name="email"
             className="w-full mt-1 p-2 border bg-gray-100 rounded-md cursor-not-allowed"
@@ -136,6 +146,7 @@ export default function AddCampaign() {
         <div>
           <label className="block font-medium text-gray-700">User Name</label>
           <input
+          value={user.displayName}
             type="text"
             name="name"
             className="w-full mt-1 p-2 border bg-gray-100 rounded-md cursor-not-allowed"
