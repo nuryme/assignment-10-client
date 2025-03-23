@@ -4,11 +4,9 @@ import Swal from "sweetalert2";
 import { Navigate, useLocation, useNavigate } from "react-router-dom";
 
 export default function AddCampaign() {
-const {user} = useContext(AuthContext)
-const navigate = useNavigate()
-// console.log(user.displayName, user.email)
-
-
+  const { user } = useContext(AuthContext);
+  const navigate = useNavigate();
+  // console.log(user.displayName, user.email)
 
   const handleSubmit = (event) => {
     event.preventDefault();
@@ -36,18 +34,18 @@ const navigate = useNavigate()
     };
     // console.log(campaignInfo)
 
-    fetch("http://localhost:5000/campaigns", {
+    fetch("https://assignment-10-server-vert-two.vercel.app/campaigns", {
       method: "post",
       body: JSON.stringify(campaignInfo),
       headers: { "content-type": "application/json" },
     })
       .then((res) => res.json())
       .then((data) => {
-        if(data.insertedId) {
-            Swal.fire("Added successfully!");
+        if (data.insertedId) {
+          Swal.fire("Added successfully!");
         }
-        form.reset()
-        navigate('/')
+        form.reset();
+        navigate("/");
       });
   };
 
@@ -141,7 +139,7 @@ const navigate = useNavigate()
         <div>
           <label className="block font-medium text-gray-700">User Email</label>
           <input
-          value={user?.email}
+            value={user?.email}
             type="email"
             name="email"
             className="w-full mt-1 p-2 border bg-gray-100 rounded-md cursor-not-allowed"
@@ -152,7 +150,7 @@ const navigate = useNavigate()
         <div>
           <label className="block font-medium text-gray-700">User Name</label>
           <input
-          value={user?.displayName}
+            value={user?.displayName}
             type="text"
             name="name"
             className="w-full mt-1 p-2 border bg-gray-100 rounded-md cursor-not-allowed"

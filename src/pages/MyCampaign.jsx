@@ -19,9 +19,12 @@ export default function MyCampaign() {
       confirmButtonText: "Yes, delete it!",
     }).then((result) => {
       if (result.isConfirmed) {
-        fetch(`http://localhost:5000/campaigns/${id}`, {
-          method: "delete",
-        })
+        fetch(
+          `https://assignment-10-server-vert-two.vercel.app/campaigns/${id}`,
+          {
+            method: "delete",
+          }
+        )
           .then((res) => res.json())
           .then((data) => {
             if (data.deletedCount > 0) {
@@ -42,8 +45,8 @@ export default function MyCampaign() {
 
   return (
     <div className="mt-20">
-        <Tooltip id="tooltip-delete" />
-        <Tooltip id="tooltip-update" />
+      <Tooltip id="tooltip-delete" />
+      <Tooltip id="tooltip-update" />
       <h2 className="h2 text-center mb-6">All campaign here</h2>
       <div className="overflow-x-auto">
         <table className="table">

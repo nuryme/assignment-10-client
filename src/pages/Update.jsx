@@ -32,15 +32,18 @@ export default function Update() {
     };
     // console.log(campaignInfo)
 
-    fetch(`http://localhost:5000/campaigns/${data._id}`, {
-        method: 'put',
+    fetch(
+      `https://assignment-10-server-vert-two.vercel.app/campaigns/${data._id}`,
+      {
+        method: "put",
         body: JSON.stringify(campaignInfo),
-        headers: {'content-type': 'application/json'}
-    })
+        headers: { "content-type": "application/json" },
+      }
+    )
       .then((res) => res.json())
       .then((data) => {
-        if(data.modifiedCount > 0) {
-            Swal.fire('Updated Successfully!')
+        if (data.modifiedCount > 0) {
+          Swal.fire("Updated Successfully!");
         }
       });
   };

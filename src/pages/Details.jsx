@@ -9,29 +9,29 @@ export default function Details() {
   //   console.log(data);
 
   const handleDonation = () => {
-    const today = new Date()
-    
+    const today = new Date();
+
     const userName = user?.displayName;
     const userEmail = user?.email;
-    const title = campaign.title
-    const donationInfo = { userName, userEmail, title};
+    const title = campaign.title;
+    const donationInfo = { userName, userEmail, title };
 
-    fetch("http://localhost:5000/donations", {
+    fetch("https://assignment-10-server-vert-two.vercel.app/donations", {
       method: "post",
       body: JSON.stringify(donationInfo),
       headers: { "content-type": "application/json" },
     })
       .then((res) => res.json())
       .then((data) => {
-        if(new Date(campaign.deadline) < today) {
+        if (new Date(campaign.deadline) < today) {
           return Swal.fire({
             icon: "error",
             title: "Oops...",
             text: "Date Expired!",
           });
         }
-        if(data.insertedId) {
-          Swal.fire('Donation Successful')
+        if (data.insertedId) {
+          Swal.fire("Donation Successful");
         }
       });
   };
